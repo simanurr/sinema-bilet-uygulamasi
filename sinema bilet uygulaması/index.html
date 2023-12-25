@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sinema bilet rezervasyon</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="screen"></div>
+        <div class="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat reserved"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+        </div>
+        <div class="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+        </div>
+        <div class="row">
+            <div class="seat reserved"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat reserved"></div>
+            <div class="seat"></div>
+        </div>
+        <div class="row">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+        </div>
+        <div class="row">
+            <div class="seat reserved"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat reserved"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+        </div>
+    </div>
+    <div class="movie-list">
+        <select id="movie">
+            <option disabled>film seçiniz</option>
+            <option value="20">film1</option>
+            <option value="25">film2</option>
+            <option value="30">film3</option>
+        </select>
+    </div>
+    <ul class="info">
+        
+            <li>
+                <div class="seat"></div>
+                <small>boş</small>
+            </li>
+            <li>
+                <div class="seat reserved"></div>
+                <small>dolu</small>
+            </li>
+            <li>
+                <div class="seat selected "></div>
+                <small>seçili</small>
+            </li>
+       
+        </ul>
+    <p class="text">
+        <span id="count">1</span> adet koltuk için hesaplanan ücret<br> <span id="autumn">1.film 20<br>2.film 25<br>3.film 30</span> TL    
+    </p>
+
+    <script>
+        const container = document.querySelector('.container');
+        const count = document.getElementById('count');
+        const autumn = document.getElementById('autumn');
+        const select = document.getElementById('movie');
+        
+        container.addEventListener('click', function(e){
+            if(e.target.classList.contains('seat') && !e.target.classList.contains('reserved')){
+                e.target.classList.toggle('selected');
+                calculateTotal()
+            }
+        });
+        
+        select.addEventListener('change',function(e){
+            calculateTotal()
+        });
+        
+        function calculateTotal(){
+            let selectedSeatCount = container.querySelectorAll('.seat.selected').length; /let değişkeni tekrar tanımlanamaz ama güncellenebilir./
+            let price = select.value; 
+            count.innerText = selectedSeatCount;
+            autumn.innerText = selectedSeatCount * price;
+        }
+    </script>   
+</body>
+</html>
